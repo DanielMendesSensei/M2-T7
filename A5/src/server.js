@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import { logger } from "./middlewares/logger.js";
 import { testConnection, syncDatabase } from "./config/sequelize.js";
-import routes from "./routes/index.js";
 
 // Load environment variables
 dotenv.config();
@@ -15,20 +14,7 @@ app.use(logger);
 app.use(express.json());
 
 // Routes
-app.use("/", routes);
-
-// app.use((req, res, next) => {
-//   console.log("Primeiro middleware");
-//   const { title, content, tags } = req.body;
-
-//   if (!title && !content && !tags) {
-//     console.log("Não tem informações no body");
-//     res
-//       .status(400)
-//       .json({ status: 400, message: "Não tem informações no body" });
-//   }
-//   next(); // Chama o próximo
-// });
+// app.use("/", routes);
 
 // Initialize database and start server
 const startServer = async () => {
