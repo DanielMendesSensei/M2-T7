@@ -60,6 +60,10 @@ User.init(
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,

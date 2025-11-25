@@ -1,19 +1,20 @@
 import { sequelize } from "../config/sequelize.js";
 import User from "./User.js";
-// importar POSTs
+import Post from "./Post.js";
 
+// Import all models here
 const models = {
   User,
-  //Post
+  Post,
 };
 
-// Aplicação da associação entre entidades caso elas existam
+// Apply associations if they exist
 Object.keys(models).forEach((modelName) => {
   if (models[modelName].associate) {
     models[modelName].associate(models);
   }
 });
 
-export { sequelize, User };
+export { sequelize, User, Post };
 
 export default models;
