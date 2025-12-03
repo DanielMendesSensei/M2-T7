@@ -4,6 +4,8 @@ import { logger } from "./middlewares/logger.js";
 import routes from "./routes/index.js";
 import prisma from "./config/prisma.js";
 import { globalLimiter } from "./middlewares/ratelimit.middleware.js";
+import swaggerUI from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger.js";
 
 // Load environment variables
 dotenv.config();
@@ -14,6 +16,17 @@ const PORT = process.env.PORT || 3000;
 // Middlewares
 app.use(logger);
 app.use(express.json());
+app.use(globalLimiter);
+
+// Swagger Documentation
+app.use(
+  "/api-docs",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerSpec, {
+    explorer: true,
+    customSiteTitle: "Aula 7",
+  })
+);
 
 // Routes
 app.use("/", routes);
