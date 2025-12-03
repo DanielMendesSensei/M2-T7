@@ -1,0 +1,45 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+/// Enum equivalente ao seu objeto ListaVermelhaENUM
+enum ListaVermelha {
+  EX   /// Extinto
+  EW   /// Extinto na Natureza
+  CR   /// Criticamente em Perigo
+  EN   /// Em Perigo
+  VU   /// Vulnerável
+  NT   /// Quase Ameaçada
+  LC   /// Pouco Preocupante
+  DD   /// Dados Insuficientes
+}
+
+/// Model Animal baseado na sua classe JS
+model Animal {
+  id              Int             @id @default(autoincrement())
+  nomeGeral       String
+  nomeCientifico  String
+  genero          String
+  familia         String
+  popEstimada     Int
+  listaVermelha   ListaVermelha
+}
+
+enum User_Type {
+  ADMIN
+  NORMAL
+}
+
+model User {
+  id        String      @id @default(uuid())
+  username  String      @unique
+  password  String
+  user_type User_Type
+}
